@@ -1,0 +1,32 @@
+# Ignorar ambientes virtuais do Python
+.venv/
+venv/
+env/
+ENV/
+
+# Ignorar arquivos temporários, de cache e compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.DS_Store
+
+# Ignorar as pastas de projetos paralelos que estão no diretório no momento
+sniper_bot/
+worldcup/
+import random.py
+
+# Ignorar vídeos e áudios que você usou para testar no ambiente de desenvolvimento
+*.mp4
+*.mkv
+*.webm
+*.avi
+*.mp3
+*.wav
+*.flac
+*.m4a
+
+# Mas não ignorar a pasta 'downloads/' vazia.
+downloads/
+!downloads/.gitkeep
