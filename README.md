@@ -18,7 +18,7 @@ Certifique-se de que seu sistema possui:
 
 - [Python 3.8+](https://www.python.org/downloads/)
 - [FFmpeg](https://ffmpeg.org/download.html) (Crucial. É ele que permite ao `yt-dlp` mesclar áudio e vídeo em altas resoluções ou converter para *.mp3*). Certifique-se de adicioná-lo ao `PATH` do Windows.
-- Opcional mas recomendado: [Node.js](https://nodejs.org/) instalado no sistema operativo para ajudar com extrações mais eficientes em alguns provedores.
+- Opcional mas recomendado: [Node.js](https://nodejs.org/) instalado no sistema operacional para ajudar com extrações mais eficientes em alguns sites.
 
 ## 🔧 Instalação
 
