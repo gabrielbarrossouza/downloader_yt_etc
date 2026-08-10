@@ -1,68 +1,104 @@
-# Downloader Perfeito (Alta Eficiência)
+# Downloader Perfeito
 
-Um aplicativo em Python simples e poderoso para baixar vídeos e áudios do YouTube (e muitos outros sites suportados pelo yt-dlp). Este projeto oferece duas opções de uso: uma **Interface Gráfica (GUI)** amigável construída com Tkinter e uma **Interface de Linha de Comando (CLI)** elegante feita com Rich e Questionary.
+Aplicativo em Python para baixar vídeos, áudios, playlists e canais usando o
+`yt-dlp`. Ele oferece uma interface gráfica em Tkinter e uma interface de
+terminal com Rich e Questionary.
 
-## 🚀 Funcionalidades
+Use o aplicativo apenas para conteúdo que você tem autorização para baixar e
+respeite os termos do site de origem.
 
-- **Duas abordagens**:
-  - `interface.py`: Interface visual para quem busca praticidade.
-  - `downloader.py`: Terminal interativo e esteticamente agradável para "power users".
-- **Múltiplas resoluções**: Baixe vídeos na resolução que preferir, inclusive na "melhor qualidade" disponível (o sistema junta os melhores fluxos de vídeo e áudio).
-- **Extração de Áudio**: Baixe apenas o áudio do vídeo, escolhendo imediatamente formatos como `.mp3`, `.m4a`, `.wav` ou `.flac`.
-- **Informações em Tempo Real**: Barra de progresso, percentual, velocidade de download e tempo restante (ETA).
-- **Integração com Node.js**: Usa Node.js automaticamente (se instalado) via yt-dlp para burlar restrições complexas do YouTube.
+## Principais recursos
 
-## 📋 Pré-requisitos
+- Qualidades reais disponíveis para vídeos individuais.
+- Download de playlists e canais em uma pasta organizada.
+- Fila de múltiplos links: cole vários URLs (um por linha) e baixe todos de
+  uma vez, na GUI ou pelo terminal.
+- Conversão de áudio para MP3, M4A, WAV ou FLAC.
+- Saída de vídeo em MP4, MKV ou WebM.
+- Progresso, velocidade, tempo restante e retomada de arquivos parciais.
+- Ignora automaticamente itens já baixados de uma coleção (arquivo de
+  controle por playlist/canal).
+- Histórico de downloads concluídos, com aba dedicada na GUI e comando
+  `--history` no terminal.
+- Preferências (pasta, qualidade, formato, tema) são lembradas entre uma
+  execução e outra.
+- Tema claro/escuro alternável na interface gráfica.
+- Cancelamento seguro e botão para abrir a pasta de destino na interface gráfica.
+- Detecção de FFmpeg e Node.js.
 
-Certifique-se de que seu sistema possui:
+## Requisitos
 
-- [Python 3.8+](https://www.python.org/downloads/)
-- [FFmpeg](https://ffmpeg.org/download.html) (Crucial. É ele que permite ao `yt-dlp` mesclar áudio e vídeo em altas resoluções ou converter para *.mp3*). Certifique-se de adicioná-lo ao `PATH` do Windows.
-- Opcional mas recomendado: [Node.js](https://nodejs.org/) instalado no sistema operacional para ajudar com extrações mais eficientes em alguns sites.
+- Python 3.10 ou mais recente.
+- [FFmpeg](https://ffmpeg.org/download.html) disponível no `PATH`. Ele é usado
+  para unir vídeo e áudio e para conversões.
+- Node.js é opcional, mas ajuda o `yt-dlp` em alguns extratores.
 
-## 🔧 Instalação
+## Instalação
 
-1. Clone o repositório para o seu computador:
-   ```bash
-   git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-   cd SEU_REPOSITORIO
-   ```
+No PowerShell, dentro da pasta do projeto:
 
-2. Crie e ative um ambiente virtual (recomendado boas práticas):
-   ```bash
-   python -m venv .venv
-   # Ativando no Windows:
-   .venv\Scripts\activate
-   ```
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
 
-3. Instale as dependências do projeto:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Uso
 
-## 💻 Como Usar
+No Windows, dê dois cliques em `baixar.bat`. O iniciador usa o ambiente virtual
+quando ele existe e só instala dependências se estiverem ausentes.
 
-### Pela Interface Gráfica
-Basta executar o atalho `.bat` ou rodar o script no terminal:
+Para abrir a interface diretamente:
 
-```bash
+```powershell
 python interface.py
 ```
-> *(Dê um clique duplo no `baixar.bat` se estiver no Windows! Ele atualizará o motor do yt-dlp e iniciará a interface sozinho).*
 
-### Pela Linha de Comando (CLI)
-Através do terminal, você terá um passo a passo agradável e interativo:
+Para usar o terminal interativo:
 
-```bash
+```powershell
 python downloader.py
 ```
-> *(Ou você pode puxá-lo direto colando o link: `python downloader.py https://link-do-video...`)*
 
-As opções de formato, arquivo e destino serão perguntadas com menus amigáveis graças à biblioteca `questionary`. Arquivos baixados por padrão vão para a pasta `downloads`.
+Também é possível informar um ou mais links e a pasta de destino diretamente:
 
-## 📁 Estrutura do Código
+```powershell
+python downloader.py "https://exemplo.com/video" --output "D:\Videos"
+python downloader.py "https://exemplo.com/video1" "https://exemplo.com/video2"
+```
 
-- `downloader.py` - Script CLI de alta fidelidade visual.
-- `interface.py` - Ferramenta de janelas.
-- `requirements.txt` - Depedências (`yt-dlp`, `rich`, `questionary` etc.).
-- `baixar.bat` - Executável de facilitação no Windows.
+Para ver os downloads mais recentes:
+
+```powershell
+python downloader.py --history
+```
+
+Os arquivos vão por padrão para a última pasta usada (ou para `downloads`,
+localizada ao lado dos scripts, na primeira execução), independentemente do
+diretório usado para iniciar o programa.
+
+## Estrutura
+
+- `interface.py`: interface gráfica (abas Baixar/Histórico, tema claro/escuro).
+- `downloader.py`: interface de terminal.
+- `downloader_core.py`: validações, preferências, histórico e configuração
+  compartilhada do yt-dlp.
+- `tests/`: testes das regras que não dependem de acesso à internet.
+- `baixar.bat`: iniciador para Windows.
+- `settings.json` / `history.json`: gerados automaticamente ao lado dos
+  scripts para guardar preferências e histórico locais (não versionados).
+
+## Testes
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+## Solução de problemas
+
+- **FFmpeg não encontrado:** instale-o, adicione a pasta do executável ao
+  `PATH` e reabra o aplicativo.
+- **Falha em um site específico:** atualize o motor com
+  `python -m pip install --upgrade yt-dlp`.
+- **Download interrompido:** inicie novamente com o mesmo link e destino; o
+  arquivo parcial será retomado quando o site permitir.

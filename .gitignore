@@ -30,3 +30,7 @@ import random.py
 # Mas não ignorar a pasta 'downloads/' vazia.
 downloads/
 !downloads/.gitkeep
+
+# Preferências e histórico são estado local de cada máquina.
+settings.json
+history.json
