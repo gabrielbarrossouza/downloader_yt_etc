@@ -34,3 +34,4 @@ downloads/
 # Preferências e histórico são estado local de cada máquina.
 settings.json
 history.json
+downloader.log
